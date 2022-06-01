@@ -20,6 +20,14 @@ import br.com.alura.forum.repository.UsuarioRepository;
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
+	private static final String[] AUTH_WHITELIST = {
+	        "/swagger-resources/**",
+	        "/swagger-ui.html",
+	        "/v2/api-docs",
+	        "/webjars/**",
+	        "/configuration/**"
+	};
+	
 	@Autowired
 	private AutenticacaoService autenticacaoService;
 	
@@ -58,6 +66,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	//Configuracoes de recursos estaticos(js, css, imagens, etc.)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(AUTH_WHITELIST);
 	}
 	
 }
